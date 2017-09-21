@@ -1,5 +1,6 @@
 import "./StandardToken.sol";
 import "../lib/SafeMath.sol";
+import "../ExchangeContract.sol";
 
 contract LATToken is StandardToken, SafeMath {
 
