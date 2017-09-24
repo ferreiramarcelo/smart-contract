@@ -54,12 +54,8 @@ contract LATokenMinter is SafeMath {
             throw;
         }
 
-        // [200 mln] - [sold during token sale]
-        uint tokenSaleDiff = sub(contributorsHardCap, contributorsTotalBalance);
         // 200 mln
-        uint secondPool = 200000000;
-
-        uint totalInstantAmount = add(tokenSaleDiff, secondPool);
+        uint totalInstantAmount = 400000000;
 
         if (!token.issueTokens(teamPoolInstant, totalInstantAmount)) {
             throw;

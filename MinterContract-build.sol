@@ -1,5 +1,19 @@
 pragma solidity ^0.4.12;
 
+/*
+
+contract SafeMath - mathematics with overflow checks
+contract Token - abstract ERC20 token
+contract StandardToken - default realization of ERC20 token
+contract LATToken - realization of ERC20-based LAT Token
+contract ExchangeContract - contract-helper to support exchanging old tokens to the new ones (if it will be needed in future)
+
+This smart contract (LATokenMinter) realizes base logic of minting the LAT Tokens:
+1. Send 400 000 000 of LAT tokens to the company wallet on the Token Sale ending
+2. Starting from 22.08.2022 smart contract will everyday send 328 767 LAT to the company wallet in next 5 years. It will send 600 000 000 tokens in total.
+
+*/
+
 
 /**
  * Math operations with safety checks
@@ -407,12 +421,8 @@ contract LATokenMinter is SafeMath {
             throw;
         }
 
-        // [200 mln] - [sold during token sale]
-        uint tokenSaleDiff = sub(contributorsHardCap, contributorsTotalBalance);
         // 200 mln
-        uint secondPool = 200000000;
-
-        uint totalInstantAmount = add(tokenSaleDiff, secondPool);
+        uint totalInstantAmount = 400000000;
 
         if (!token.issueTokens(teamPoolInstant, totalInstantAmount)) {
             throw;

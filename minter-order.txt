@@ -1,3 +1,4 @@
+minter-comments.txt
 lib/SafeMath.sol
 base-token/Token.sol
 base-token/StandardToken.sol
