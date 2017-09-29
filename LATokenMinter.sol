@@ -118,8 +118,8 @@ contract LATokenMinter is SafeMath {
             currentDay = 5 * 365;
         }
 
-        uint maxCurrentHarvest = currentDay * unfrozePerDay;
-        uint wasNotHarvested = maxCurrentHarvest - alreadyHarvestedTokens;
+        uint maxCurrentHarvest = mul(currentDay, unfrozePerDay);
+        uint wasNotHarvested = sub(maxCurrentHarvest, alreadyHarvestedTokens);
 
         if (!token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested)) {
             throw;
