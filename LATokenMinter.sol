@@ -15,16 +15,11 @@ contract LATokenMinter is SafeMath {
 
     bool public teamInstantSent = false; // Flag to prevent multiple issuance for team pool after token sale
 
-    uint public contributorsTotalBalance; // Total tokens issued for contributors
-
-    uint public contributorsHardCap = 200000000; // Hard cap of tokens during token sale
-
-    uint public startTime;            // Unix timestamp of start
-    uint public endTime;              // Unix timestamp of end
-    uint public numberOfDays;         // Number of windows after 0
-    uint public unfrozePerDay;        // Tokens sold in each window
-
-    mapping (uint => bool) public harvested; // Mapping with indicators of which days was harvested for unfrozen tokens or not
+    uint public startTime;               // Unix timestamp of start
+    uint public endTime;                 // Unix timestamp of end
+    uint public numberOfDays;            // Number of windows after 0
+    uint public unfrozePerDay;           // Tokens sold in each window
+    uint public alreadyHarvestedTokens;  // Tokens were already harvested and sent to team pool
 
     /*
      *  Modifiers
@@ -54,7 +49,7 @@ contract LATokenMinter is SafeMath {
             throw;
         }
 
-        // 200 mln
+        // 400 mln
         uint totalInstantAmount = 400000000;
 
         if (!token.issueTokens(teamPoolInstant, totalInstantAmount)) {
@@ -63,20 +58,6 @@ contract LATokenMinter is SafeMath {
 
         teamInstantSent = true;
         return true;
-    }
-
-    function fundManually(address beneficiary, uint _tokenCount)
-        external
-        onlyHelper
-        returns (uint)
-    {
-        if (!token.issueTokens(beneficiary, _tokenCount)) {
-            revert();
-        } else {
-            contributorsTotalBalance = add(contributorsTotalBalance, _tokenCount);
-        }
-
-        return _tokenCount;
     }
 
     function changeTokenAddress(address newAddress)
@@ -130,26 +111,23 @@ contract LATokenMinter is SafeMath {
         returns (uint)
     {
         uint currentTimeDiff = now - startTime;
-        uint currentDay = currentTimeDiff / (24 * 3600);
+        uint currentDay = (currentTimeDiff / (24 * 3600)) + 1;
 
         if (now >= endTime) {
             currentTimeDiff = endTime - startTime + 1;
-            currentDay = 5 * 365 - 1;
+            currentDay = 5 * 365;
         }
 
-        uint harvestedTotal = 0;
+        uint maxCurrentHarvest = currentDay * unfrozePerDay;
+        uint wasNotHarvested = maxCurrentHarvest - alreadyHarvestedTokens;
 
-        for (uint i = 0; i <= currentDay; i++) {
-            if (!harvested[i]) {
-                if (!token.issueTokens(teamPoolForFrozenTokens, unfrozePerDay)) {
-                    throw;
-                }
-                harvestedTotal = add(harvestedTotal, unfrozePerDay);
-                harvested[i] = true;
-            }
+        if (!token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested)) {
+            throw;
         }
 
-        return harvestedTotal;
+        alreadyHarvestedTokens = add(alreadyHarvestedTokens, wasNotHarvested);
+
+        return wasNotHarvested;
     }
 
     function LATokenMinter(address _LATTokenAddress, address _helperAddress) {
@@ -162,12 +140,9 @@ contract LATokenMinter is SafeMath {
         endTime = startTime + numberOfDays * 1 days;
 
         uint frozenTokens = 600000000;
+        alreadyHarvestedTokens = 0;
 
         unfrozePerDay = frozenTokens / numberOfDays;
-        
-        for (uint i = 0; i < numberOfDays; i++) {
-            harvested[i] = false;
-        }
     }
 
     function () payable {
