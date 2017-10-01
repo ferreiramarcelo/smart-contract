@@ -1,6 +1,6 @@
-pragma solidity ^0.4.12;
+pragma solidity ^0.4.15;
 
-import "./base-token/LATToken.sol"
+import "./base-token/LATToken.sol";
 
 contract ExchangeContract {
 
@@ -21,13 +21,13 @@ contract ExchangeContract {
         _;
     }
 
-    modifier onlyPreviousToken() { 
+    modifier onlyPreviousToken() {
     	if (msg.sender != prevTokenAddress) {
             revert();
         }
         _;
     }
-    
+
 	function changeCourse(uint256 _prevCourse, uint256 _nextCourse)
 		public
 		onlyFounder
@@ -38,7 +38,7 @@ contract ExchangeContract {
 
 	function exchange(address _for, uint256 prevTokensAmount)
 		public
-		onlyPreviousToken 
+		onlyPreviousToken
 		returns (bool)
 	{
 		// проверить на отсылаемого
@@ -66,9 +66,4 @@ contract ExchangeContract {
 		prevCourse = _prevCourse;
 		nextCourse = _nextCourse;
 	}
-
-	function assert(bool x) internal {
-        if (!x) throw;
-    }
-
 }

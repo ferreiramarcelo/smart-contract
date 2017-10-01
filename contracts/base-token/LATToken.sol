@@ -1,3 +1,5 @@
+pragma solidity ^0.4.15;
+
 import "./StandardToken.sol";
 import "../lib/SafeMath.sol";
 import "../ExchangeContract.sol";
@@ -93,7 +95,7 @@ contract LATToken is StandardToken, SafeMath {
         public
         onlyFounder
         returns (bool)
-    {   
+    {
         minter = newAddress;
     }
 
@@ -101,7 +103,7 @@ contract LATToken is StandardToken, SafeMath {
         public
         onlyFounder
         returns (bool)
-    {   
+    {
         founder = newAddress;
     }
 
@@ -109,7 +111,7 @@ contract LATToken is StandardToken, SafeMath {
         public
         onlyFounder
         returns (bool)
-    {   
+    {
         exchanger = newAddress;
     }
 
@@ -120,9 +122,5 @@ contract LATToken is StandardToken, SafeMath {
     function LATToken() {
         founder = msg.sender;
         totalSupply = 0;
-    }
-
-    function assert(bool x) internal {
-        if (!x) throw;
     }
 }
