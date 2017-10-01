@@ -1,4 +1,4 @@
-pragma solidity ^0.4.12;
+pragma solidity ^0.4.15;
 
 import "./base-token/LATToken.sol";
 import "./lib/SafeMath.sol";
@@ -6,7 +6,7 @@ import "./lib/SafeMath.sol";
 contract LATokenMinter is SafeMath {
 
     LATToken public token; // Token contract
-    
+
     address public founder; // Address of founder
     address public helper;  // Address of helper
 
@@ -73,7 +73,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         founder = newAddress;
         return true;
     }
@@ -82,7 +82,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         helper = newAddress;
         return true;
     }
@@ -91,7 +91,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         teamPoolInstant = newAddress;
         return true;
     }
@@ -100,7 +100,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         teamPoolForFrozenTokens = newAddress;
         return true;
     }
