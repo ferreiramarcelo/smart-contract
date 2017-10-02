@@ -45,16 +45,12 @@ contract LATokenMinter is SafeMath {
         onlyFounder
         returns (bool)
     {
-        if (teamInstantSent) {
-            throw;
-        }
+        require(!teamInstantSent);
 
         // 400 mln
         uint totalInstantAmount = 400000000;
 
-        if (!token.issueTokens(teamPoolInstant, totalInstantAmount)) {
-            throw;
-        }
+        require(token.issueTokens(teamPoolInstant, totalInstantAmount));
 
         teamInstantSent = true;
         return true;
@@ -121,9 +117,7 @@ contract LATokenMinter is SafeMath {
         uint maxCurrentHarvest = mul(currentDay, unfrozePerDay);
         uint wasNotHarvested = sub(maxCurrentHarvest, alreadyHarvestedTokens);
 
-        if (!token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested)) {
-            throw;
-        }
+        require(token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested));
 
         alreadyHarvestedTokens = add(alreadyHarvestedTokens, wasNotHarvested);
 
@@ -146,6 +140,6 @@ contract LATokenMinter is SafeMath {
     }
 
     function () payable {
-        throw;
+        require(false);
     }
 }
