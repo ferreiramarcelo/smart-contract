@@ -3,7 +3,8 @@ pragma solidity ^0.4.15;
 import "./base-token/LATToken.sol";
 import "./lib/SafeMath.sol";
 
-contract LATokenMinter is SafeMath {
+contract LATokenMinter {
+    using SafeMath for uint256;
 
     LATToken public token; // Token contract
 
@@ -118,14 +119,14 @@ contract LATokenMinter is SafeMath {
             currentDay = 5 * 365;
         }
 
-        uint maxCurrentHarvest = mul(currentDay, unfrozePerDay);
-        uint wasNotHarvested = sub(maxCurrentHarvest, alreadyHarvestedTokens);
+        uint maxCurrentHarvest = currentDay.mul(unfrozePerDay);
+        uint wasNotHarvested = maxCurrentHarvest.sub(alreadyHarvestedTokens);
 
         if (!token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested)) {
             throw;
         }
 
-        alreadyHarvestedTokens = add(alreadyHarvestedTokens, wasNotHarvested);
+        alreadyHarvestedTokens = alreadyHarvestedTokens.add(wasNotHarvested);
 
         return wasNotHarvested;
     }
