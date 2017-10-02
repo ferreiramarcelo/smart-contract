@@ -110,12 +110,14 @@ contract LATokenMinter is SafeMath {
         onlyHelper
         returns (uint)
     {
-        uint currentTimeDiff = now - startTime;
-        uint currentDay = (currentTimeDiff / (24 * 3600)) + 1;
+        uint currentTimeDiff = sub(now, startTime);
+        uint secondsPerDay = mul(24, 3600);
+        uint daysFromStart = div(currentTimeDiff, secondsPerDay);
+        uint currentDay = add(daysFromStart, 1);
 
         if (now >= endTime) {
-            currentTimeDiff = endTime - startTime + 1;
-            currentDay = 5 * 365;
+            currentTimeDiff = add(sub(endTime, startTime), 1);
+            currentDay = mul(5, 365);
         }
 
         uint maxCurrentHarvest = mul(currentDay, unfrozePerDay);
@@ -135,14 +137,14 @@ contract LATokenMinter is SafeMath {
         helper = _helperAddress;
         token = LATToken(_LATTokenAddress);
 
-        numberOfDays = 5 * 365; // 5 years
+        numberOfDays = mul(5, 365); // 5 years
         startTime = 1503399600; // 22 august 2017 11:00 GMT+0;
-        endTime = startTime + numberOfDays * 1 days;
+        endTime = add(startTime, mul(numberOfDays, 1 days));
 
         uint frozenTokens = 600000000;
         alreadyHarvestedTokens = 0;
 
-        unfrozePerDay = frozenTokens / numberOfDays;
+        unfrozePerDay = div(frozenTokens, numberOfDays);
     }
 
     function () payable {
