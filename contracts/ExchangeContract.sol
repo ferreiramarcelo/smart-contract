@@ -43,10 +43,10 @@ contract ExchangeContract {
 	{
 		// проверить на отсылаемого
 		if (prevToken.balanceOf(_for) >= prevTokensAmount) {
-			uint256 amount = prevTokensAmount / prevCourse;
+			uint256 amount = div(prevTokensAmount, prevCourse);
 
-			assert(prevToken.burnTokens(_for, amount * prevCourse));
-			assert(nextToken.issueTokens(_for, amount * nextCourse));
+			assert(prevToken.burnTokens(_for, mul(amount, prevCourse)));
+			assert(nextToken.issueTokens(_for, mul(amount, nextCourse)));
 
 			return true;
 		} else {
