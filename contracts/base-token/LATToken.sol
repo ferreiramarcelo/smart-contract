@@ -116,7 +116,7 @@ contract LATToken is StandardToken, SafeMath {
     }
 
     function () payable {
-        throw;
+        require(false);
     }
 
     function LATToken() {
