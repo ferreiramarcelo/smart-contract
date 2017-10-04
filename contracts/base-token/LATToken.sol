@@ -34,7 +34,7 @@ contract LATToken is StandardToken, SafeMath {
 
     function transfer(address _to, uint256 _value) returns (bool success) {
 
-        if (exchanger && _to == exchanger) {
+        if (exchanger != 0x0 && _to == exchanger) {
             assert(ExchangeContract(exchanger).exchange(msg.sender, _value));
             return true;
         }
