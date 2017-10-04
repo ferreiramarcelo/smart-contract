@@ -1,8 +1,10 @@
 pragma solidity ^0.4.15;
 
 import "./base-token/LATToken.sol";
+import "./lib/SafeMath.sol";
 
 contract ExchangeContract {
+    using SafeMath for uint256;
 
 	address public founder;
 	uint256 public prevCourse;
@@ -43,10 +45,10 @@ contract ExchangeContract {
 	{
 		// проверить на отсылаемого
 		if (prevToken.balanceOf(_for) >= prevTokensAmount) {
-			uint256 amount = div(prevTokensAmount, prevCourse);
+			uint256 amount = prevTokensAmount.div(prevCourse);
 
-			assert(prevToken.burnTokens(_for, mul(amount, prevCourse)));
-			assert(nextToken.issueTokens(_for, mul(amount, nextCourse)));
+			assert(prevToken.burnTokens(_for, amount.mul(prevCourse)));
+			assert(nextToken.issueTokens(_for, amount.mul(nextCourse)));
 
 			return true;
 		} else {

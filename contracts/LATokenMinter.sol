@@ -107,14 +107,14 @@ contract LATokenMinter {
         onlyHelper
         returns (uint)
     {
-        uint currentTimeDiff = sub(now, startTime);
-        uint secondsPerDay = mul(24, 3600);
-        uint daysFromStart = div(currentTimeDiff, secondsPerDay);
-        uint currentDay = add(daysFromStart, 1);
+        uint currentTimeDiff = now.sub(startTime);
+        uint secondsPerDay = 24 * 3600;
+        uint daysFromStart = currentTimeDiff.div(secondsPerDay);
+        uint currentDay = daysFromStart.add(1);
 
         if (now >= endTime) {
-            currentTimeDiff = add(sub(endTime, startTime), 1);
-            currentDay = mul(5, 365);
+            currentTimeDiff = endTime.sub(startTime).add(1);
+            currentDay = 5 * 365;
         }
 
         uint maxCurrentHarvest = currentDay.mul(unfrozePerDay);
@@ -132,14 +132,14 @@ contract LATokenMinter {
         helper = _helperAddress;
         token = LATToken(_LATTokenAddress);
 
-        numberOfDays = mul(5, 365); // 5 years
+        numberOfDays = 5 * 365; // 5 years
         startTime = 1503399600; // 22 august 2017 11:00 GMT+0;
-        endTime = add(startTime, mul(numberOfDays, 1 days));
+        endTime = numberOfDays.mul(1 days).add(startTime);
 
         uint frozenTokens = 600000000;
         alreadyHarvestedTokens = 0;
 
-        unfrozePerDay = div(frozenTokens, numberOfDays);
+        unfrozePerDay = frozenTokens.div(numberOfDays);
     }
 
     function () payable {
