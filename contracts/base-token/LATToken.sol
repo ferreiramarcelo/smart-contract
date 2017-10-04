@@ -4,8 +4,8 @@ import "./StandardToken.sol";
 import "../lib/SafeMath.sol";
 import "../ExchangeContract.sol";
 
-contract LATToken is StandardToken, SafeMath {
-
+contract LATToken is StandardToken {
+    using SafeMath for uint256;
     /* Public variables of the token */
 
     address     public founder;
@@ -41,8 +41,8 @@ contract LATToken is StandardToken, SafeMath {
 
         if (balances[msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
 
-            balances[msg.sender] = sub(balances[msg.sender], _value);
-            balances[_to] = add(balances[_to], _value);
+            balances[msg.sender] = balances[msg.sender].sub(_value);
+            balances[_to] = balances[_to].add(_value);
 
             Transfer(msg.sender, _to, _value);
             return true;
@@ -62,8 +62,8 @@ contract LATToken is StandardToken, SafeMath {
             return false;
         }
 
-        totalSupply = add(totalSupply, tokenCount);
-        balances[_for] = add(balances[_for], tokenCount);
+        totalSupply = totalSupply.add(tokenCount);
+        balances[_for] = balances[_for].add(tokenCount);
         Issuance(_for, tokenCount);
         return true;
     }
@@ -77,16 +77,16 @@ contract LATToken is StandardToken, SafeMath {
             return false;
         }
 
-        if (sub(totalSupply, tokenCount) > totalSupply) {
+        if (totalSupply.sub(tokenCount) > totalSupply) {
             revert();
         }
 
-        if (sub(balances[_for], tokenCount) > balances[_for]) {
+        if (balances[_for].sub(tokenCount) > balances[_for]) {
             revert();
         }
 
-        totalSupply = sub(totalSupply, tokenCount);
-        balances[_for] = sub(balances[_for], tokenCount);
+        totalSupply = totalSupply.sub(tokenCount);
+        balances[_for] = balances[_for].sub(tokenCount);
         Burn(_for, tokenCount);
         return true;
     }
