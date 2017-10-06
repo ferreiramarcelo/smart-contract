@@ -1,0 +1,19 @@
+{
+  "name": "LAToken-Contracts-Audit",
+  "version": "1.0.0",
+  "main": "truffle.js",
+  "repository": "https://github.com/ElKornacio/contracts-early",
+  "author": "Danila Simonov @ElKornacio",
+  "license": "MIT",
+  "dependencies": {
+    "truffle": "^3.4.11"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "yarn truffle compile",
+    "deploy": "yarn truffle migrate",
+    "test": "yarn truffle test"
+  }
+}

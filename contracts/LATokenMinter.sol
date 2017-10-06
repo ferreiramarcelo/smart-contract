@@ -1,12 +1,13 @@
-pragma solidity ^0.4.12;
+pragma solidity ^0.4.15;
 
 import "./base-token/LATToken.sol";
 import "./lib/SafeMath.sol";
 
-contract LATokenMinter is SafeMath {
+contract LATokenMinter {
+    using SafeMath for uint256;
 
     LATToken public token; // Token contract
-    
+
     address public founder; // Address of founder
     address public helper;  // Address of helper
 
@@ -45,16 +46,12 @@ contract LATokenMinter is SafeMath {
         onlyFounder
         returns (bool)
     {
-        if (teamInstantSent) {
-            throw;
-        }
+        require(!teamInstantSent);
 
         // 400 mln
         uint totalInstantAmount = 400000000;
 
-        if (!token.issueTokens(teamPoolInstant, totalInstantAmount)) {
-            throw;
-        }
+        require(token.issueTokens(teamPoolInstant, totalInstantAmount));
 
         teamInstantSent = true;
         return true;
@@ -73,7 +70,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         founder = newAddress;
         return true;
     }
@@ -82,7 +79,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         helper = newAddress;
         return true;
     }
@@ -91,7 +88,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         teamPoolInstant = newAddress;
         return true;
     }
@@ -100,7 +97,7 @@ contract LATokenMinter is SafeMath {
         external
         onlyFounder
         returns (bool)
-    {   
+    {
         teamPoolForFrozenTokens = newAddress;
         return true;
     }
@@ -110,24 +107,22 @@ contract LATokenMinter is SafeMath {
         onlyHelper
         returns (uint)
     {
-        uint currentTimeDiff = sub(now, startTime);
-        uint secondsPerDay = mul(24, 3600);
-        uint daysFromStart = div(currentTimeDiff, secondsPerDay);
-        uint currentDay = add(daysFromStart, 1);
+        uint currentTimeDiff = now.sub(startTime);
+        uint secondsPerDay = 24 * 3600;
+        uint daysFromStart = currentTimeDiff.div(secondsPerDay);
+        uint currentDay = daysFromStart.add(1);
 
         if (now >= endTime) {
-            currentTimeDiff = add(sub(endTime, startTime), 1);
-            currentDay = mul(5, 365);
+            currentTimeDiff = endTime.sub(startTime).add(1);
+            currentDay = 5 * 365;
         }
 
-        uint maxCurrentHarvest = mul(currentDay, unfrozePerDay);
-        uint wasNotHarvested = sub(maxCurrentHarvest, alreadyHarvestedTokens);
+        uint maxCurrentHarvest = currentDay.mul(unfrozePerDay);
+        uint wasNotHarvested = maxCurrentHarvest.sub(alreadyHarvestedTokens);
 
-        if (!token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested)) {
-            throw;
-        }
+        require(token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested));
 
-        alreadyHarvestedTokens = add(alreadyHarvestedTokens, wasNotHarvested);
+        alreadyHarvestedTokens = alreadyHarvestedTokens.add(wasNotHarvested);
 
         return wasNotHarvested;
     }
@@ -137,17 +132,17 @@ contract LATokenMinter is SafeMath {
         helper = _helperAddress;
         token = LATToken(_LATTokenAddress);
 
-        numberOfDays = mul(5, 365); // 5 years
+        numberOfDays = 5 * 365; // 5 years
         startTime = 1503399600; // 22 august 2017 11:00 GMT+0;
-        endTime = add(startTime, mul(numberOfDays, 1 days));
+        endTime = numberOfDays.mul(1 days).add(startTime);
 
         uint frozenTokens = 600000000;
         alreadyHarvestedTokens = 0;
 
-        unfrozePerDay = div(frozenTokens, numberOfDays);
+        unfrozePerDay = frozenTokens.div(numberOfDays);
     }
 
     function () payable {
-        throw;
+        require(false);
     }
 }
