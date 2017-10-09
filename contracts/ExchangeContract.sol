@@ -56,6 +56,15 @@ contract ExchangeContract {
 		}
 	}
 
+	function changeFounder(address newAddress)
+        external
+        onlyFounder
+        returns (bool)
+    {
+        founder = newAddress;
+        return true;
+    }
+
 	function ExchangeContract(address _prevTokenAddress, address _nextTokenAddress, uint256 _prevCourse, uint256 _nextCourse) {
 		founder = msg.sender;
 

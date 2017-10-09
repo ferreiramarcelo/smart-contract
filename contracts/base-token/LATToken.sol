@@ -97,6 +97,7 @@ contract LATToken is StandardToken {
         returns (bool)
     {
         minter = newAddress;
+        return true;
     }
 
     function changeFounder(address newAddress)
@@ -105,6 +106,7 @@ contract LATToken is StandardToken {
         returns (bool)
     {
         founder = newAddress;
+        return true;
     }
 
     function changeExchanger(address newAddress)
@@ -113,6 +115,7 @@ contract LATToken is StandardToken {
         returns (bool)
     {
         exchanger = newAddress;
+        return true;
     }
 
     function () payable {
