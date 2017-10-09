@@ -54,7 +54,6 @@ contract LATToken is StandardToken {
 
     function issueTokens(address _for, uint tokenCount)
         external
-        payable
         onlyMinter
         returns (bool)
     {
