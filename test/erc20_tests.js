@@ -1,4 +1,3 @@
-//let MiniMeTokenFactory = artifacts.require("MiniMeTokenFactory");
 let LATToken = artifacts.require("LATToken");
 const BigNumber = require("bignumber.js");
 const assertFail = require("./helpers/assertFail");
