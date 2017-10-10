@@ -1,7 +1,6 @@
-minter-comments.txt
-lib/SafeMath.sol
-base-token/Token.sol
-base-token/StandardToken.sol
-base-token/LATToken.sol
-./ExchangeContract.sol
-./LATokenMinter.sol
+contracts/lib/SafeMath.sol
+contracts/base-token/Token.sol
+contracts/base-token/StandardToken.sol
+contracts/base-token/LATToken.sol
+contracts//ExchangeContract.sol
+contracts//LATokenMinter.sol
