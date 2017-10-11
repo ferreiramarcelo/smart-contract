@@ -11,8 +11,6 @@ install:
   - npm install
 matrix:
   fast_finish: true
-  allow_failures:
-    - env: SOLIDITY_COVERAGE=true
 script:
   - npm test
 after_script:
