@@ -48,10 +48,10 @@ The audit report is focused on the following key areas - though this is not an e
   - [x] Fixed [2a85d4b5](https://github.com/ElKornacio/contracts-early/commit/2a85d4b5f63c078dfdaefe6f11a025fe77fb91bb)
 - **No Pragma specified for LAToken** - ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/4)
   - [x] Fixed [2a85d4b5](https://github.com/ElKornacio/contracts-early/commit/2a85d4b5f63c078dfdaefe6f11a025fe77fb91bb)  
-- **Tidy code** -  In `ExchangeContract`: ``` prevCourse = _prevCourse; nextCourse = _nextCourse; ``` can be replaced by `changeCourse(_prevCourse, _nextCourse);` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/27)
-  - Unresolved
 - **Comment needs fixing for accuracy** -  See line [#136](https://github.com/ElKornacio/contracts-early/blob/master/contracts/LATokenMinter.sol#L136]) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/31)
-  - Unresolved
+  - [x] Fixed [000ba0ad](https://github.com/ElKornacio/contracts-early/commit/000ba0addc6360d5ad6c2bc26e50e0c497e1a1a1)
+- **Tidy code** -  In `ExchangeContract`: ``` prevCourse = _prevCourse; nextCourse = _nextCourse; ``` can be replaced by `changeCourse(_prevCourse, _nextCourse);` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/27)
+  - Unresolved 
 - **Token and address stored as globals** -  Rather than storing the address and token as globals ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/26)
   - Unresolved
 - **Minter should default to founder on LATToken creation** -  Similar to how `founder` is set to `msg.sender` on `LATToken` creation, `minter` should be set to `msg.sender` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/19)
@@ -69,7 +69,7 @@ The audit report is focused on the following key areas - though this is not an e
 - **Unable to harvest/exchange unless minter is set to the LATokenMinter contract** - The minter contract address needs to be set as the `minter` to `harvest` or `exchange` but needs to be set to a user's address to burn ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/34)
   - [x] Fixed [7fb14b32](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/commit/7fb14b3222aab60e37a6e6fa10b3ef6dca7c2c42)  
 - **Add check for if teamPoolForFrozenTokens has been set** -  There is no check if `teamPoolForFrozenTokens` has been set resulting in dangerously being able to mint these tokens into nowhere ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/22)
-  - Unresolved
+  - [x] Fixed [000ba0ad](https://github.com/ElKornacio/contracts-early/commit/000ba0addc6360d5ad6c2bc26e50e0c497e1a1a1)
 
 ### Major
 - None found
