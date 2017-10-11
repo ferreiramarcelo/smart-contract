@@ -88,6 +88,7 @@ contract("ExchangeContract", function(accounts) {
     await prevToken.changeMinter(accounts[0]);
     await prevToken.issueTokens(accounts[0], 10000);
     await prevToken.changeExchanger(exchangeContract.address);
+    await nextToken.changeExchanger(exchangeContract.address);
 
     await prevToken.transfer(exchangeContract.address, 10000, {
       from: accounts[0]
