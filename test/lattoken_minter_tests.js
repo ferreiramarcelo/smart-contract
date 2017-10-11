@@ -42,4 +42,43 @@ contract("LATokenMinter", function(accounts) {
     await assertFail(async () => { await minter.harvest() });
   });
 
+  it("Test the onlyFounder modifier", async () => {
+    assert.equal(await minter.founder.call(), accounts[0]);
+    await assertFail(async () => { await minter.changeFounder(accounts[1], { from: accounts[1] }) } );
+    await minter.changeFounder(accounts[1]);
+    await assertFail(async () => { await minter.changeFounder(accounts[1], { from: accounts[0] }) } );
+    assert.equal(await minter.founder.call(), accounts[1]);
+  });
+
+  it("Test the onlyHelper modifier", async () => {
+    assert.equal(await minter.helper.call(), accounts[0]);
+    await assertFail(async () => { await minter.changeHelper(accounts[1], { from: accounts[1] }) } );
+    await minter.changeHelper(accounts[1]);
+    assert.equal(await minter.helper.call(), accounts[1]);
+  });
+
+  it("Test the changeTokenAddress function", async () => {
+    assert.equal(await minter.token.call(), token.address);
+    let new_token = await LATtoken.new();
+    await assertFail(async () => { await minter.changeTokenAddress(new_token.address, { from: accounts[1] }) } );
+    await minter.changeTokenAddress(new_token.address);
+    assert.equal(await minter.token.call(), new_token.address);
+  });
+
+  it("Test the changeTeamPoolInstant function", async () => {
+    assert.equal(await minter.teamPoolInstant.call(), 0);
+    await assertFail(async () => { await minter.changeTeamPoolInstant(accounts[2], { from: accounts[1] }) } );
+    await minter.changeTeamPoolInstant(accounts[2]);
+    assert.equal(await minter.teamPoolInstant.call(), accounts[2]);
+  });
+
+  it('the fallback function should revert unknown functions', async () => {
+    await assertFail(async () => { await web3.eth.sendTransaction({
+        'from': accounts[0],
+        'to': minter.address,
+        'value': 1
+      })
+    });
+  });
+
 });
