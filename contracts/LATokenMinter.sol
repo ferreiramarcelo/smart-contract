@@ -107,6 +107,8 @@ contract LATokenMinter {
         onlyHelper
         returns (uint)
     {
+        require(teamPoolForFrozenTokens);
+
         uint currentTimeDiff = now.sub(startTime);
         uint secondsPerDay = 24 * 3600;
         uint daysFromStart = currentTimeDiff.div(secondsPerDay);
@@ -120,6 +122,7 @@ contract LATokenMinter {
         uint maxCurrentHarvest = currentDay.mul(unfrozePerDay);
         uint wasNotHarvested = maxCurrentHarvest.sub(alreadyHarvestedTokens);
 
+        require(wasNotHarvested > 0);
         require(token.issueTokens(teamPoolForFrozenTokens, wasNotHarvested));
 
         alreadyHarvestedTokens = alreadyHarvestedTokens.add(wasNotHarvested);
@@ -133,7 +136,7 @@ contract LATokenMinter {
         token = LATToken(_LATTokenAddress);
 
         numberOfDays = 5 * 365; // 5 years
-        startTime = 1661166000; // 22 august 2017 11:00 GMT+0;
+        startTime = 1661166000; // 22 august 2022 11:00 GMT+0;
         endTime = numberOfDays.mul(1 days).add(startTime);
 
         uint baseValue = 600000000;
