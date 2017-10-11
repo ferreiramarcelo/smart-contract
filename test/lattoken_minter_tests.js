@@ -7,7 +7,7 @@ const minute = 60
 const hour = 60 * minute;
 const day = 24 * hour;
 
-const minterStartTime = 1503399600; // This comes from the LATToken constructor
+const minterStartTime = 1661166000; // This comes from the LATToken constructor
 const tokenPerDay = 328767123287;
 
 contract("LATokenMinter", function(accounts) {
