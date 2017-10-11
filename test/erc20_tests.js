@@ -4,7 +4,7 @@ const assertFail = require("./helpers/assertFail");
 
 let latToken;
 
-contract("LATToken Defualt", function(accounts) {
+contract("LATToken Default", function(accounts) {
   beforeEach(async () => {
         latToken = await LATToken.new();
   });
@@ -52,7 +52,7 @@ contract("LATToken", function(accounts) {
     );
   });
 
-  //Fails due to transfer throwing rather than returning 
+  //Fails due to transfer throwing rather than returning
   it("transfers: should fail when trying to transfer 10001 to accounts[1] with accounts[0] having 10000", async () => {
     await latToken.transfer(
       accounts[1], 100001,
@@ -66,7 +66,7 @@ contract("LATToken", function(accounts) {
     );
   });
 
-  // APPROVALS 
+  // APPROVALS
   it("approvals: msg.sender should approve 100 to accounts[1]", async () => {
     watcher = latToken.Approval();
     await latToken.approve(accounts[1], 100, { from: accounts[0] });
