@@ -107,7 +107,7 @@ contract LATokenMinter {
         onlyHelper
         returns (uint)
     {
-        require(teamPoolForFrozenTokens);
+        require(teamPoolForFrozenTokens != 0x0);
 
         uint currentTimeDiff = now.sub(startTime);
         uint secondsPerDay = 24 * 3600;
