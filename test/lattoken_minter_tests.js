@@ -54,6 +54,7 @@ contract("LATokenMinter", function(accounts) {
     assert.equal(await minter.helper.call(), accounts[0]);
     await assertFail(async () => { await minter.changeHelper(accounts[1], { from: accounts[1] }) } );
     await minter.changeHelper(accounts[1]);
+    await assertFail(async () => { await minter.harvest() });
     assert.equal(await minter.helper.call(), accounts[1]);
   });
 
@@ -79,6 +80,14 @@ contract("LATokenMinter", function(accounts) {
         'value': 1
       })
     });
+  });
+
+  it('test the fundteaminstant function', async () => {
+    assert.equal((await token.balanceOf.call(accounts[2])).toNumber(), 0);
+    await minter.changeTeamPoolInstant(accounts[2]);
+    await minter.fundTeamInstant();
+    assert.equal((await token.balanceOf.call(accounts[2])).toNumber(), 400000000000000);
+    await assertFail(async () => { await minter.fundTeamInstant() } );
   });
 
 });
