@@ -60,14 +60,14 @@ The audit report is focused on the following key areas - though this is not an e
   - Unresolved
 - **Add README.md outlining contract deployment instructions** -  Recommended to add documentation similar to the examples below to increase transparency: ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/13)
   - Unresolved
+- **Add check in harvest method before issuing tokens** -  Recommended to add another check in `harvest` method `require(wasNotHarvested >0)` BEFORE token.issueTokens ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/24)
+  - Unresolved  
 
 ### Moderate
 - **SafeMath should be used for all mathematical operations** -  Please SafeMath should be used: - [LATokenMinter.sol #113](https://github.com/ElKornacio/contracts-early/blob/199e6a8ce4662f4e3a66e7b689876baea42e665a/LATokenMinter.sol#L113) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/2)
   - [x] Fixed [2a85d4b5](https://github.com/ElKornacio/contracts-early/commit/2a85d4b5f63c078dfdaefe6f11a025fe77fb91bb)
 - **Unable to harvest/exchange unless minter is set to the LATokenMinter contract** - The minter contract address needs to be set as the `minter` to `harvest` or `exchange` but needs to be set to a user's address to burn ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/34)
-  - Unresolved
-- **Add check in harvest method before issuing tokens** -  Recommended to add another check in `harvest` method `require(wasNotHarvested >0)` BEFORE token.issueTokens ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/24)
-  - Unresolved
+  - [x] Fixed [7fb14b32](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/commit/7fb14b3222aab60e37a6e6fa10b3ef6dca7c2c42)  
 - **Add check for if teamPoolForFrozenTokens has been set** -  There is no check if `teamPoolForFrozenTokens` has been set resulting in dangerously being able to mint these tokens into nowhere ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/22)
   - Unresolved
 
