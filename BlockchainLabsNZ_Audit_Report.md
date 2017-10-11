@@ -44,7 +44,7 @@ The audit report is focused on the following key areas - though this is not an e
   - [ ] Fixed
 - **Token and address stored as globals** -  Rather than storing the address and token as globals: ``` address public prevTokenAddress; address public nextTokenAddress; LATToken public prevToken; ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/26)
   - [ ] Fixed
-- **currentDay offset by 1 ** -  [#L113](https://github.com/ElKornacio/contracts-early/blob/master/contracts/LATokenMinter.sol#L113]) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/20)
+- **currentDay offset by 1** -  [#L113](https://github.com/ElKornacio/contracts-early/blob/master/contracts/LATokenMinter.sol#L113]) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/20)
   - [x] Fixed [d22c25e8](https://github.com/ElKornacio/contracts-early/commit/d22c25e8f4bb91d48630772d5d948a9fba0d9252)
 - **Minter should default to founder on LATToken creation** -  Similar to how `founder` is set to `msg.sender` on `LATToken` creation, `minter` should be set to `msg.sender`  [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/19)
   - [ ] Fixed
