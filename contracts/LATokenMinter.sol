@@ -133,7 +133,7 @@ contract LATokenMinter {
         token = LATToken(_LATTokenAddress);
 
         numberOfDays = 5 * 365; // 5 years
-        startTime = 1503399600; // 22 august 2017 11:00 GMT+0;
+        startTime = 1661166000; // 22 august 2017 11:00 GMT+0;
         endTime = numberOfDays.mul(1 days).add(startTime);
 
         uint baseValue = 600000000;
