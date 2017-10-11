@@ -1,6 +1,6 @@
 # LA Token Contracts
 
-[![Coverage Status](https://coveralls.io/repos/github/BlockchainLabsNZ/LAToken-Contracts-Audit/badge.svg?branch=travis)](https://coveralls.io/github/BlockchainLabsNZ/LAToken-Contracts-Audit?branch=travis) [![Build Status](https://travis-ci.org/BlockchainLabsNZ/LAToken-Contracts-Audit.svg?branch=master)](https://travis-ci.org/BlockchainLabsNZ/LAToken-Contracts-Audit)
+[![Coverage Status](https://coveralls.io/repos/github/BlockchainLabsNZ/LAToken-Contracts-Audit/badge.svg?branch=master)](https://coveralls.io/github/BlockchainLabsNZ/LAToken-Contracts-Audit?branch=master) [![Build Status](https://travis-ci.org/BlockchainLabsNZ/LAToken-Contracts-Audit.svg?branch=master)](https://travis-ci.org/BlockchainLabsNZ/LAToken-Contracts-Audit)
 
 The smart contracts for the [LA Token][latoken] token (LAT) crowdsale.
 
