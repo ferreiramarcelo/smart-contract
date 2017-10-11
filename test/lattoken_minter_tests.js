@@ -13,11 +13,8 @@ const tokenPerDay = 328767123287;
 contract("LATokenMinter", function(accounts) {
   beforeEach(async () => {
     token = await LATtoken.new();
-    console.log('new token');
     minter = await LATminter.new(token.address, accounts[0]);
     await token.changeMinter(minter.address);
-    // await token.issueTokens(accounts[0], 10000000);
-    console.log(minter.address);
     await minter.changeTeamPoolForFrozenTokens(accounts[1]);
   });
 
