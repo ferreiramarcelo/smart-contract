@@ -13,7 +13,7 @@ contract LATToken is StandardToken {
     address     public exchanger = 0;
 
     string      public name             =       "LAT Token";
-    uint8       public decimals         =       6;
+    uint8       public decimals         =       18;
     string      public symbol           =       "LAT";
     string      public version          =       "0.7.1";
 
@@ -25,8 +25,8 @@ contract LATToken is StandardToken {
         _;
     }
 
-    modifier onlyMinter() {
-        if (msg.sender != minter) {
+    modifier onlyMinterAndExchanger() {
+        if (msg.sender != minter && msg.sender != exchanger) {
             revert();
         }
         _;
@@ -54,7 +54,7 @@ contract LATToken is StandardToken {
 
     function issueTokens(address _for, uint tokenCount)
         external
-        onlyMinter
+        onlyMinterAndExchanger
         returns (bool)
     {
         if (tokenCount == 0) {
@@ -69,7 +69,7 @@ contract LATToken is StandardToken {
 
     function burnTokens(address _for, uint tokenCount)
         external
-        onlyMinter
+        onlyMinterAndExchanger
         returns (bool)
     {
         if (tokenCount == 0) {

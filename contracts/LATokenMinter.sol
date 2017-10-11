@@ -49,7 +49,7 @@ contract LATokenMinter {
         require(!teamInstantSent);
 
         uint baseValue = 400000000;
-        uint totalInstantAmount = baseValue.mul(1000000); // 400 millions with 6 decimal points
+        uint totalInstantAmount = baseValue.mul(1000000000000000000); // 400 millions with 6 decimal points
 
         require(token.issueTokens(teamPoolInstant, totalInstantAmount));
 
@@ -137,7 +137,7 @@ contract LATokenMinter {
         endTime = numberOfDays.mul(1 days).add(startTime);
 
         uint baseValue = 600000000;
-        uint frozenTokens = baseValue.mul(1000000); // 600 millions with 6 decimal points
+        uint frozenTokens = baseValue.mul(1000000000000000000); // 600 millions with 6 decimal points
         alreadyHarvestedTokens = 0;
 
         unfrozePerDay = frozenTokens.div(numberOfDays);
