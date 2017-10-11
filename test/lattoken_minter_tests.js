@@ -8,7 +8,7 @@ const hour = 60 * minute;
 const day = 24 * hour;
 
 const minterStartTime = 1661166000; // This comes from the LATToken constructor
-const tokenPerDay = 328767123287;
+const tokenPerDay = 328767123287671260000000;
 
 contract("LATokenMinter", function(accounts) {
   beforeEach(async () => {
@@ -18,7 +18,30 @@ contract("LATokenMinter", function(accounts) {
     await minter.changeTeamPoolForFrozenTokens(accounts[1]);
   });
 
-  it("Harvest function works correctly", async () => {
+  it("Harvest function works correctly after 1 week", async () => {
+    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), 0);
+    await minter.setBlockTimestamp(minterStartTime + (7 * day));
+    await minter.harvest();
+    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), tokenPerDay * 8);
+  });
+
+  it("Harvest function works correctly after 1 year", async () => {
+    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), 0);
+    await minter.setBlockTimestamp(minterStartTime + (365 * day));
+    await minter.harvest();
+    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), tokenPerDay * 366);
+  });
+
+  it("Harvest function works correctly after 5 years and fails after harvesting total supply", async () => {
+    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), 0);
+    await minter.setBlockTimestamp(minterStartTime + (5 * (365 * day)));
+    await minter.harvest();
+    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), 600000000000000000000000000);
+
+    await assertFail(async () => { await minter.harvest() });
+  });
+
+  it("Harvest function works correctly after 0 days and 1 day", async () => {
     assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), 0);
     await minter.setBlockTimestamp(minterStartTime);
     await minter.harvest();
@@ -26,20 +49,6 @@ contract("LATokenMinter", function(accounts) {
     await minter.setBlockTimestamp(minterStartTime + (1 * day));
     await minter.harvest();
     assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), tokenPerDay * 2);
-
-    await minter.setBlockTimestamp(minterStartTime + (8 * day));
-    await minter.harvest();
-    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), tokenPerDay * 9);
-
-    await minter.setBlockTimestamp(minterStartTime + (365 * day));
-    await minter.harvest();
-    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), tokenPerDay * 366);
-
-    await minter.setBlockTimestamp(minterStartTime + (5 * (365 * day)));
-    await minter.harvest();
-    assert.equal((await token.balanceOf.call(accounts[1])).toNumber(), tokenPerDay * (5 * 365));
-
-    await assertFail(async () => { await minter.harvest() });
   });
 
   it("Test the onlyFounder modifier", async () => {
@@ -86,7 +95,7 @@ contract("LATokenMinter", function(accounts) {
     assert.equal((await token.balanceOf.call(accounts[2])).toNumber(), 0);
     await minter.changeTeamPoolInstant(accounts[2]);
     await minter.fundTeamInstant();
-    assert.equal((await token.balanceOf.call(accounts[2])).toNumber(), 400000000000000);
+    assert.equal((await token.balanceOf.call(accounts[2])).toNumber(), 400000000000000000000000000);
     await assertFail(async () => { await minter.fundTeamInstant() } );
   });
 
