@@ -13,9 +13,6 @@ contract ExchangeContract {
 	address public prevTokenAddress;
 	address public nextTokenAddress;
 
-	LATToken public prevToken;
-	LATToken public nextToken;
-
 	modifier onlyFounder() {
         if (msg.sender != founder) {
             revert();
@@ -30,6 +27,7 @@ contract ExchangeContract {
         _;
     }
 
+    // sets new conversion rate
 	function changeCourse(uint256 _prevCourse, uint256 _nextCourse)
 		public
 		onlyFounder
@@ -43,12 +41,16 @@ contract ExchangeContract {
 		onlyPreviousToken
 		returns (bool)
 	{
-		// проверить на отсылаемого
+
+		LATToken prevToken = LATToken(prevTokenAddress);
+     	LATToken nextToken = LATToken(nextTokenAddress);
+
+		// check if balance is correct
 		if (prevToken.balanceOf(_for) >= prevTokensAmount) {
 			uint256 amount = prevTokensAmount.div(prevCourse);
 
-			assert(prevToken.burnTokens(_for, amount.mul(prevCourse)));
-			assert(nextToken.issueTokens(_for, amount.mul(nextCourse)));
+			assert(prevToken.burnTokens(_for, amount.mul(prevCourse))); // remove previous tokens
+			assert(nextToken.issueTokens(_for, amount.mul(nextCourse))); // give new ones
 
 			return true;
 		} else {
@@ -71,10 +73,6 @@ contract ExchangeContract {
 		prevTokenAddress = _prevTokenAddress;
 		nextTokenAddress = _nextTokenAddress;
 
-		prevToken = LATToken(_prevTokenAddress);
-		nextToken = LATToken(_nextTokenAddress);
-
-		prevCourse = _prevCourse;
-		nextCourse = _nextCourse;
+		changeCourse(_prevCourse, _nextCourse);
 	}
 }
