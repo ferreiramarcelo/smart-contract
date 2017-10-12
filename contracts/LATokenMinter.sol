@@ -41,6 +41,7 @@ contract LATokenMinter {
         _;
     }
 
+    // sends 400 millions of tokens to teamPool at the token sale ending (200m for distribution + 200m for company)
     function fundTeamInstant()
         external
         onlyFounder
@@ -49,7 +50,7 @@ contract LATokenMinter {
         require(!teamInstantSent);
 
         uint baseValue = 400000000;
-        uint totalInstantAmount = baseValue.mul(1000000000000000000); // 400 millions with 6 decimal points
+        uint totalInstantAmount = baseValue.mul(1000000000000000000); // 400 millions with 18 decimal points
 
         require(token.issueTokens(teamPoolInstant, totalInstantAmount));
 
@@ -102,6 +103,7 @@ contract LATokenMinter {
         return true;
     }
 
+    // method which will be called each day after 5 years to get unfrozen tokens
     function harvest()
         external
         onlyHelper
@@ -139,7 +141,7 @@ contract LATokenMinter {
         endTime = numberOfDays.mul(1 days).add(startTime);
 
         uint baseValue = 600000000;
-        uint frozenTokens = baseValue.mul(1000000000000000000); // 600 millions with 6 decimal points
+        uint frozenTokens = baseValue.mul(1000000000000000000); // 600 millions with 18 decimal points
         alreadyHarvestedTokens = 0;
 
         unfrozePerDay = frozenTokens.div(numberOfDays);
@@ -151,5 +153,5 @@ contract LATokenMinter {
 
     function getBlockTimestamp() returns (uint256) {
         return block.timestamp;
-      }
+    }
 }
