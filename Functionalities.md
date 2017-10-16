@@ -14,9 +14,9 @@
 # Overview
  
 ### Project consists 3 internal libraries:
-1.    [Token.sol][https://github.com/LAToken/smart-contract/blob/master/contracts/base-token/Token.sol] – abstract contract for ERC20 tokens with necessary functions declarations without any internal logic
-2.    [StandardToken.sol][https://github.com/LAToken/smart-contract/blob/master/contracts/base-token/StandardToken.sol] – implementation of ERC20 token with all necessary logic (described below)
-3.    [SafeMath.sol][https://github.com/LAToken/smart-contract/blob/master/contracts/lib/SafeMath.sol] – provides all mathematical operations on uint256 with safety checks (basically overflow checks).
+1.    [Token.sol][lib1] – abstract contract for ERC20 tokens with necessary functions declarations without any internal logic
+2.    [StandardToken.sol][lib2] – implementation of ERC20 token with all necessary logic (described below)
+3.    [SafeMath.sol][lib3] – provides all mathematical operations on uint256 with safety checks (basically overflow checks).
  
 ### And 3 base parts:
 1.    LATToken.sol - Smart contract of ERC20 token itself
@@ -150,3 +150,7 @@ After that it burns specified amount of previous tokens and issues calculated am
 Saves new prices of previous and next token
 #### Function changeFounder
 This function can be executed only by founder. It replaces current founder address by the specified new address
+
+[lib1]: https://github.com/LAToken/smart-contract/blob/master/contracts/base-token/Token.sol
+[lib2]: https://github.com/LAToken/smart-contract/blob/master/contracts/base-token/StandardToken.sol
+[lib3]: https://github.com/LAToken/smart-contract/blob/master/contracts/lib/SafeMath.sol

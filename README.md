@@ -8,7 +8,7 @@ The smart contracts for the [LA Token][latoken] token (LAT) crowdsale.
 
 ## Smart Contracts content and functionalities
 
-Please see the [full document][https://github.com/LAToken/smart-contract/blob/master/Functionalities.md] to find any information on this smart contracts.
+Please see the [full document][fulldoc] to find any information on this smart contracts.
 
 ## Contracts
 
@@ -43,6 +43,7 @@ $ npm install
 $ npm test
 ```
 
+[fulldoc]: https://github.com/LAToken/smart-contract/blob/master/Functionalities.md
 [latoken]: https://latoken.com/
 
 [solidity]: https://solidity.readthedocs.io/en/develop/
