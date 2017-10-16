@@ -6,6 +6,10 @@ The smart contracts for the [LA Token][latoken] token (LAT) crowdsale.
 
 ![LA Token](LA_Token.png)
 
+## Smart Contracts content and functionalities
+
+Please see the [full document][https://github.com/LAToken/smart-contract/blob/master/Functionalities.md] to find any information on this smart contracts.
+
 ## Contracts
 
 Please see the [contracts/](contracts) directory.
