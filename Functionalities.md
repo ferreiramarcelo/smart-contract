@@ -3,7 +3,7 @@
 ## Goals
 1.  Creation of ERC20-compatible (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) LAT tokens available for storing in Ethereum-compatible wallets and trading on cryptoexchanges
 2.  Issuance of 400 000 000 tokens to the address of company pool. Part of this tokens will be used for distribution of tokens for contributors (about 11000 contributors).
-3.  Starting from 22 August 2022 issuance of 600 000 000 will start and will last next 5 years. Every day equal amount of tokens (328 767 tokens) will be sent to the address of company pool until all 600 000 000 tokens is issued.
+3.  Starting from 22 August 2022 issuance of 600 000 000 will start and will last next 5 years. Every day equal amount of tokens (328,767.12328767126 tokens) will be sent to the address of company pool until all 600 000 000 tokens is issued.
 ## Restrictions
 1. By “execution” or “calling” specified function here and below will be meant process of sending signed transaction which will cause EVM to process block of code marked as a function with specified name. Transaction must be signed using private key of some Ethereum-address (and entering password of this key if necessary), used address is called “executor” or “caller” of function.
 2. All addresses (founder, token, minter, exchanger, helper) in smart contracts should be changeable in terms of having ability to upgrade and fix anything. They should be changeable ONLY by founder and by no one else.
@@ -14,9 +14,9 @@
 # Overview
  
 ### Project consists 3 internal libraries:
-1.    Token.sol – abstract contract for ERC20 tokens with necessary functions declarations without any internal logic
-2.    StandardToken.sol – implementation of ERC20 token with all necessary logic (described below)
-3.    SafeMath.sol – provides all mathematical operations on uint256 with safety checks (basically overflow checks).
+1.    [Token.sol][https://github.com/LAToken/smart-contract/blob/master/contracts/base-token/Token.sol] – abstract contract for ERC20 tokens with necessary functions declarations without any internal logic
+2.    [StandardToken.sol][https://github.com/LAToken/smart-contract/blob/master/contracts/base-token/StandardToken.sol] – implementation of ERC20 token with all necessary logic (described below)
+3.    [SafeMath.sol][https://github.com/LAToken/smart-contract/blob/master/contracts/lib/SafeMath.sol] – provides all mathematical operations on uint256 with safety checks (basically overflow checks).
  
 ### And 3 base parts:
 1.    LATToken.sol - Smart contract of ERC20 token itself
