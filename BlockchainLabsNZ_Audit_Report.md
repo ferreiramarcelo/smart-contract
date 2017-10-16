@@ -76,6 +76,11 @@ The audit report is focused on the following key areas - though this is not an e
 ### Critical
 - None found
 
+### Addendum
+Upon finalization of the contracts to be used by LAToken, the developers have diligently enumerated all the functions of the contracts in [Functionalities.md](https://github.com/ElKornacio/contracts-early/blob/71fa1007d59db9534965d58edc396297e7c7a75a/Functionalities.md).
+
+We have reviewed this document to ensure that there are no ommisions and that the developers' comments are a fair summary of each function.
+
 ## Conclusion
 Overall we have been satisfied with the resulting contracts following the audit feedback period. We took part in creating a test suite using the Truffle Framework to fully satisfy coverage in all areas.
 
