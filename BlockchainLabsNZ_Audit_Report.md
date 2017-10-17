@@ -51,17 +51,17 @@ The audit report is focused on the following key areas - though this is not an e
 - **Comment needs fixing for accuracy** -  See line [#136](https://github.com/ElKornacio/contracts-early/blob/master/contracts/LATokenMinter.sol#L136]) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/31)
   - [x] Fixed [000ba0ad](https://github.com/ElKornacio/contracts-early/commit/000ba0addc6360d5ad6c2bc26e50e0c497e1a1a1)
 - **Add check in harvest method before issuing tokens** -  Recommended to add another check in `harvest` method `require(wasNotHarvested >0)` BEFORE token.issueTokens ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/24)
-  - [x] Fixed [000ba0ad](https://github.com/ElKornacio/contracts-early/commit/000ba0addc6360d5ad6c2bc26e50e0c497e1a1a1) 
-- **Tidy code** -  In `ExchangeContract`: ``` prevCourse = _prevCourse; nextCourse = _nextCourse; ``` can be replaced by `changeCourse(_prevCourse, _nextCourse);` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/27)
-  - Unresolved 
+  - [x] Fixed [000ba0ad](https://github.com/ElKornacio/contracts-early/commit/000ba0addc6360d5ad6c2bc26e50e0c497e1a1a1)
+- **Tidy code** -  In `ExchangeContract`: ``` prevCourse = _prevCourse; nextCourse = _nextCourse; ``` can be replaced by `changeCourse(_prevCourse, _nextCourse);` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/19Contracts-Audit/issues/27)
+  - [x] Fixed [76a7a05f](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/pull/41/commits/76a7a05fb47d5e716aeb65c55242150a973f14f3)
 - **Token and address stored as globals** -  Rather than storing the address and token as globals ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/26)
-  - Unresolved
-- **Minter should default to founder on LATToken creation** -  Similar to how `founder` is set to `msg.sender` on `LATToken` creation, `minter` should be set to `msg.sender` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/19)
-   - Unresolved
+  - [x] Fixed [76a7a05f](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/pull/41/commits/76a7a05fb47d5e716aeb65c55242150a973f14f3)
 - **Remove comment in Non-English and add ENG comments in ExchangeContract.sol** -  [#L46](https://github.com/ElKornacio/contracts-early/blob/master/contracts/ExchangeContract.sol#L46]) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/25)
-  - Unresolved
+  - [x] Fixed [76a7a05f](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/pull/41/commits/76a7a05fb47d5e716aeb65c55242150a973f14f3)
 - **Add README.md outlining contract deployment instructions** -  Recommended to add documentation similar to the examples below to increase transparency: ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/13)
-  - Unresolved
+  - [x] Fixed [76a7a05f](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/pull/41/commits/76a7a05fb47d5e716aeb65c55242150a973f14f3)
+- **Minter should default to founder on LATToken creation** -  Similar to how `founder` is set to `msg.sender` on `LATToken` creation, `minter` should be set to `msg.sender` ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/19)
+    - [x] [Fixed](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/19)
 
 ### Moderate
 - **SafeMath should be used for all mathematical operations** -  Please SafeMath should be used: - [LATokenMinter.sol #113](https://github.com/ElKornacio/contracts-early/blob/199e6a8ce4662f4e3a66e7b689876baea42e665a/LATokenMinter.sol#L113) ... [View on GitHub](https://github.com/BlockchainLabsNZ/LAToken-Contracts-Audit/issues/2)
