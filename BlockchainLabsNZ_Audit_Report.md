@@ -77,7 +77,7 @@ The audit report is focused on the following key areas - though this is not an e
 - None found
 
 ## Addendum
-Upon finalization of the contracts to be used by LAToken, the developers have diligently enumerated all the functions of the contracts in [Functionalities.md](https://github.com/ElKornacio/contracts-early/blob/71fa1007d59db9534965d58edc396297e7c7a75a/Functionalities.md).
+Upon finalization of the contracts to be used by LAToken, the developers have diligently enumerated all the functions of the contracts in [Functionalities.md](https://github.com/LAToken/smart-contract/blob/master/Functionalities.md).
 
 We have reviewed this document to ensure that there are no ommisions and that the developers' comments are a fair summary of each function.
 
