@@ -12,10 +12,10 @@ contract LATToken is StandardToken {
     address     public minter = 0;
     address     public exchanger = 0;
 
-    string      public name             =       "LAT Token";
+    string      public name             =       "LAToken";
     uint8       public decimals         =       18;
-    string      public symbol           =       "LAT";
-    string      public version          =       "0.7.1";
+    string      public symbol           =       "LAToken";
+    string      public version          =       "0.7.2";
 
 
     modifier onlyFounder() {
