@@ -8,7 +8,7 @@
   "dependencies": {
     "bignumber.js": "^4.1.0",
     "ethereumjs-testrpc": "^4.1.3",
-    "truffle": "^3.4.11"
+    "truffle": "^5.0.20"
   },
   "directories": {
     "test": "test"
